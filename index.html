@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Centrikal's Electro Vault – Listen Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Centrikal's Electro Vault – a curated stash of electro gems. Listen on Spotify or Apple Music."
+  />
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1554393415689427');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1554393415689427&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    :root {
+      --bg: #050509;
+      --card: #11111b;
+      --text-main: #f9f9ff;
+      --text-muted: #a1a1c2;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f1b3f 0, #050509 55%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: linear-gradient(145deg, #11111b 0, #070711 60%, #16122a 100%);
+      border-radius: 24px;
+      padding: 22px 20px 20px;
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.7),
+        0 0 0 1px var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow-orbit {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(127, 90, 240, 0.35), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.25), transparent 55%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .logo-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      max-height: 200px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+      justify-content: center;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.35);
+      background: rgba(12, 11, 30, 0.9);
+      color: #e5e7ff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    a.button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      transition:
+        transform 0.08s ease-out,
+        box-shadow 0.08s ease-out,
+        border-color 0.1s ease-out,
+        background 0.1s ease-out;
+    }
+
+    a.button span.label-main {
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      font-size: 0.72rem;
+    }
+
+    a.button span.label-sub {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    a.button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .spotify {
+      background: #1db954;
+      color: #000;
+      box-shadow: 0 10px 26px rgba(29, 185, 84, 0.55);
+    }
+
+    .spotify:hover {
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .apple {
+      background: #f9fafb;
+      color: #000;
+      box-shadow: 0 10px 26px rgba(249, 250, 251, 0.35);
+    }
+
+    .apple:hover {
+      border-color: rgba(15, 23, 42, 0.12);
+    }
+
+    .footnote {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .footnote span:last-child {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      text-align: right;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px 16px 18px;
+      }
+
+      .logo-wrap img {
+        max-height: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="glow-orbit"></div>
+    <div class="card-inner">
+      <!-- LOGO IMAGE -->
+      <div class="logo-wrap">
+        <img src="electrovault.png" alt="Centrikal's Electro Vault" />
+      </div>
+
+      <div class="subtitle">
+        High-voltage electronic cuts from Centrikal — from dark club energy to late-night synth drift.
+      </div>
+
+      <div class="chip-row">
+        <div class="chip">Electronic</div>
+        <div class="chip">Synth</div>
+        <div class="chip">Energy</div>
+        <div class="chip">Curated</div>
+      </div>
+
+      <div class="buttons">
+        
+          href="https://open.spotify.com/playlist/1yYicyyPLF7EqD5cktvDEk"
+          class="button spotify"
+          id="spotify-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Listen on Spotify</span><br />
+            <span class="label-sub">Best for most listeners</span>
+          </div>
+        </a>
+
+        
+          href="https://music.apple.com/us/playlist/electro-vault/pl.u-WabZvdVHeAemjlM"
+          class="button apple"
+          id="apple-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Listen on Apple Music</span><br />
+            <span class="label-sub">For Apple fans &amp; Hi-Fi</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="footnote">
+        <span>You'll be redirected to your chosen platform.</span>
+        <span>Tip: add it to your library so you don't lose the vault.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Click tracking for Meta Pixel custom events -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var spotifyButton = document.getElementById('spotify-button');
+      var appleButton = document.getElementById('apple-button');
+
+      if (spotifyButton) {
+        spotifyButton.addEventListener('click', function () {
+          if (typeof fbq === 'function') {
+            fbq('trackCustom', 'SpotifyClick');
+          }
+        });
+      }
+
+      if (appleButton) {
+        appleButton.addEventListener('click', function () {
+          if (typeof fbq === 'function') {
+            fbq('trackCustom', 'AppleMusicClick');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
