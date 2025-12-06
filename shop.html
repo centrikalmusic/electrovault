@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shop - Centrikal's Electro Vault</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Support independent artists - Buy tracks from Centrikal's Electro Vault on Bandcamp and Beatport."
+  />
+
+  <style>
+    :root {
+      --bg: #050509;
+      --card: #11111b;
+      --text-main: #f9f9ff;
+      --text-muted: #a1a1c2;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --accent-blue: #3b82f6;
+      --accent-orange: #ff6b35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f1b3f 0, #050509 55%);
+      color: var(--text-main);
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin: 0 0 10px;
+      background: linear-gradient(135deg, #f9f9ff 0%, #a1a1c2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin: 10px 0 20px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent-blue);
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .track-card {
+      background: linear-gradient(145deg, #11111b 0, #070711 60%, #16122a 100%);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .track-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .track-card:hover::before {
+      opacity: 1;
+    }
+
+    .track-info {
+      margin-bottom: 16px;
+    }
+
+    .track-title {
+      font-size: 1.1rem;
+      margin: 0 0 8px;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .track-artist {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 0 0 4px;
+    }
+
+    .track-album {
+      font-size: 0.85rem;
+      color: rgba(161, 161, 194, 0.7);
+      margin: 0;
+      font-style: italic;
+    }
+
+    .track-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .buy-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .buy-link span {
+      font-size: 1rem;
+    }
+
+    .bandcamp {
+      background: #1da0c3;
+      color: #fff;
+    }
+
+    .bandcamp:hover {
+      background: #1cb5db;
+      box-shadow: 0 6px 20px rgba(29, 160, 195, 0.4);
+    }
+
+    .beatport {
+      background: #01ff95;
+      color: #000;
+    }
+
+    .beatport:hover {
+      background: #00e585;
+      box-shadow: 0 6px 20px rgba(1, 255, 149, 0.4);
+    }
+
+    .no-links {
+      font-size: 0.85rem;
+      color: rgba(161, 161, 194, 0.5);
+      margin: 0;
+      font-style: italic;
+    }
+
+    .stats {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .track-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🛒 Electro Vault Shop</h1>
+      <p>Support independent artists - Buy these tracks on Bandcamp & Beatport</p>
+      <a href="index.html" class="back-link">← Back to Vault</a>
+    </div>
+
+    <div class="track-grid">
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Convillusion</h3>
+          <p class="track-artist">Centrikal, Mekantis</p>
+          <p class="track-album">Pt. Nineteen</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://particlemusic.bandcamp.com/album/part-nineteen" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/part-nineteen/5553040" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Powerflip</h3>
+          <p class="track-artist">Berwick</p>
+          <p class="track-album">Powerflip EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://berwick.bandcamp.com/album/powerflip-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/powerflip-ep/5425959" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Do It Till Your Satisfied - Ara-U Remix</h3>
+          <p class="track-artist">Radioactive Man, ARA-U</p>
+          <p class="track-album">Jam Out The Mix</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://radioactiveman.bandcamp.com/album/jam-out-the-mix" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/jam-out-the-mix/5516818" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">One Way</h3>
+          <p class="track-artist">Centrikal</p>
+          <p class="track-album">Pt. Nineteen</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://particlemusic.bandcamp.com/album/part-nineteen" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/part-nineteen/5553040" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Spin That Shit</h3>
+          <p class="track-artist">DJ これからの緊急災害</p>
+          <p class="track-album">Black Kawasaki</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://planetariasoundsystem.bandcamp.com/album/black-kawasaki-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/black-kawasaki/3290319" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Gris - Zopelar's Loose Body Mix</h3>
+          <p class="track-artist">Data Assault, Zopelar</p>
+          <p class="track-album">GRIS</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://dataassault.bandcamp.com/album/nd032-gris" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/gris/5419713" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Err Hello</h3>
+          <p class="track-artist">Joe Seven, dBridge</p>
+          <p class="track-album">Radical Apathy</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://exitrecordsuk.bandcamp.com/album/exitlp025-joe-seven-x-dbridge-radical-apathy" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/radical-apathy/5441264" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Systematics</h3>
+          <p class="track-artist">Centrikal</p>
+          <p class="track-album">Systematics</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://subsensory.bandcamp.com/album/systematics" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/systematics/4927805" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Iridium</h3>
+          <p class="track-artist">R A L L Y</p>
+          <p class="track-album">Part Eighteen</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://particlemusic.bandcamp.com/album/part-eighteen" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/part-eighteen/5404639" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Drowning Again - Christopher Ledger 'Hypno Tool' Remix</h3>
+          <p class="track-artist">Danny Daze, Christopher Ledger</p>
+          <p class="track-album">::BLUE:: [Remixes] (Air)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://omnidisc.bandcamp.com/album/blue-remixes-air" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/blue-remixes-air/5532211" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Washout</h3>
+          <p class="track-artist">Centrikal</p>
+          <p class="track-album">Part Fifteen</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://particlemusic.bandcamp.com/album/part-fifteen" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/part-fifteen/4911432" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Microdosing</h3>
+          <p class="track-artist">Koloah</p>
+          <p class="track-album">From The Archives Vol. 1</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://aliencommunications.bandcamp.com/album/from-the-archives-vol-1" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/from-the-archives-vol-1/5526900" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Slow Moving Water</h3>
+          <p class="track-artist">214</p>
+          <p class="track-album">dolly 15YRS</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://dolly-records.bandcamp.com/album/dolly-15yrs" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/dolly-15yrs/5220162" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Puro</h3>
+          <p class="track-artist">Konerytmi</p>
+          <p class="track-album">Megapikseli</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://analogconcept.bandcamp.com/album/megapikseli" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/megapikseli/5407132" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Patron Error</h3>
+          <p class="track-artist">Saigg</p>
+          <p class="track-album">Multi Pass</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://prbitrecords.bandcamp.com/album/multi-pass" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/multi-pass/5522403" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Emotions Of The 303</h3>
+          <p class="track-artist">Acidulant</p>
+          <p class="track-album">We Are The Acid Robots vol. 1</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://zodiakcommunerecords.bandcamp.com/album/zc-elec016-we-are-the-acid-robots-vol-1" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/we-are-the-acid-robots-vol-1/5393931" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Step into the Future</h3>
+          <p class="track-artist">Perlen on Acid</p>
+          <p class="track-album">Industrial Warfare</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/industrial-warfare/5380917" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Neural Network</h3>
+          <p class="track-artist">Ian O'Donovan</p>
+          <p class="track-album">As the World Burns EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/as-the-world-burns-ep/5394673" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Fritz and Chips - D.Vices Work Hard Remix</h3>
+          <p class="track-artist">Phaedrus, D.Vices</p>
+          <p class="track-album">Deep Fried Circuits</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://subsensory.bandcamp.com/album/deep-fried-circuits" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/deep-fried-circuits/5061136" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Avian</h3>
+          <p class="track-artist">VC-118A</p>
+          <p class="track-album">Avian</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://chaindata.bandcamp.com/album/avian" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/avian/5424437" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">NEMESIS - Tool</h3>
+          <p class="track-artist">DJ MELL G</p>
+          <p class="track-album">NEXUS OF SHADOWS</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://mechatronica.bandcamp.com/album/nexus-of-shadows" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/nexus-of-shadows/5457124" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Tutto e cosi</h3>
+          <p class="track-artist">Serge Geyzel</p>
+          <p class="track-album">I don't want to fly</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://topikaprecords.bandcamp.com/album/i-dont-want-to-fly" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/i-dont-want-to-fly/5305032" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Acid Party</h3>
+          <p class="track-artist">Centrikal</p>
+          <p class="track-album">Acid Party</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://subsensory.bandcamp.com/album/acid-party" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/acid-party/4517720" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Interaction - w/ Unklevon</h3>
+          <p class="track-artist">PRZ</p>
+          <p class="track-album">Beyond The Void</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://mechatronica.bandcamp.com/album/beyond-the-void" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/beyond-the-void/5220293" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Terror Corps</h3>
+          <p class="track-artist">Fear-E</p>
+          <p class="track-album">Globus Dreams EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://superrhythmtrax.bandcamp.com/album/globus-dreams-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/globus-dreams-ep/5396690" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Leyton Lorikeet</h3>
+          <p class="track-artist">D3U5E</p>
+          <p class="track-album">This and That</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://d3u5e.bandcamp.com/album/d3u5e-this-and-that-leyton-lorikeet" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/this-and-that/5398563" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Nightside</h3>
+          <p class="track-artist">Votives, Antoni Maiovvi, Hyetal</p>
+          <p class="track-album">Votives</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://maiovvi.bandcamp.com/album/votives" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/votives/5211723" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Echo Park</h3>
+          <p class="track-artist">Dexter</p>
+          <p class="track-album">Intruder</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/intruder/5305904" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">As Time Goes - asyx remix</h3>
+          <p class="track-artist">Agit, asyx</p>
+          <p class="track-album">As Time Goes</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://eabe.bandcamp.com/album/as-time-goes" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/as-time-goes/5319316" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Turbo Specs</h3>
+          <p class="track-artist">Axiomatize</p>
+          <p class="track-album">I Am Evil EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/i-am-evil-ep/5358757" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Oppression</h3>
+          <p class="track-artist">Zobol</p>
+          <p class="track-album">Killing Culture</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://zobol.bandcamp.com/album/killing-culture" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/killing-culture/5184161" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Body Control</h3>
+          <p class="track-artist">SGT</p>
+          <p class="track-album">Circuit Riders EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://delphicirisrecords.bandcamp.com/album/circuit-riders-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/circuit-riders-ep/5287170" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Future</h3>
+          <p class="track-artist">The Running Man</p>
+          <p class="track-album">Future Relict</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://runningmanmusic.bandcamp.com/album/future-relict" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/future-relict/5311095" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Electroluddite '96</h3>
+          <p class="track-artist">Tuomas Juhani</p>
+          <p class="track-album">Celestial Elegy</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/celestial-elegy/5214215" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Futur Race</h3>
+          <p class="track-artist">Arnaud Rebotini, Acid Washed</p>
+          <p class="track-album">REDSHIFTS TO BLUESHIFTS</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://skylaxrecords.bandcamp.com/album/redshifts-to-blueshifts-r" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/redshifts-to-blueshifts/5176842" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Next Month May Be Worse</h3>
+          <p class="track-artist">M.R.E.</p>
+          <p class="track-album">Next Month May Be Worse</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://sofasessionslabel.bandcamp.com/album/m-r-e-next-month-may-be-worse-sofa041" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/next-month-may-be-worse/5309248" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Registration Error</h3>
+          <p class="track-artist">Client_03</p>
+          <p class="track-album">Testbed Assembly</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://client03.bandcamp.com/album/testbed-assembly" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/testbed-assembly/5118512" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Parsec</h3>
+          <p class="track-artist">AMP3R</p>
+          <p class="track-album">Tracklistings & Division Virtuel Records VA Compilation. , Pt. 3</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://divisionvirtuel.bandcamp.com/album/tracklistings-division-virtuel-records-va-compilation-part3" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/tracklistings-division-virtuel-records-va-compilation-pt-3/5194073" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Approaching Sector</h3>
+          <p class="track-artist">214</p>
+          <p class="track-album">Commuting Observables</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://sciencecult.bandcamp.com/album/commuting-observables" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/commuting-observables/4901010" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">What I Want</h3>
+          <p class="track-artist">Louisahhh, Helsmoortel</p>
+          <p class="track-album">What I Want</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://louisahhh.bandcamp.com/album/sugar-violence" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/roar/5135412" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Outburst</h3>
+          <p class="track-artist">MOY</p>
+          <p class="track-album">The Caustic Wymondham EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://moybassmusic.bandcamp.com/album/the-caustic-wymondham-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/the-caustic-wymondham-ep/5162039" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Arrancadora - Polybot's Dirtyelectro Club Touch Remix</h3>
+          <p class="track-artist">The Syntheroids, Freestyle Man, Polybot</p>
+          <p class="track-album">Arrancadora</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://moodmusicrecords.bandcamp.com/album/arrancadora" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/arrancadora/5141088" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Sixteen Digits - Centrikal Remix</h3>
+          <p class="track-artist">D.Vices, Centrikal</p>
+          <p class="track-album">Part Seventeen</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://particlemusic.bandcamp.com/album/part-seventeen" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/part-seventeen/5056360" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Planet V</h3>
+          <p class="track-artist">Sir Hiss</p>
+          <p class="track-album">Planet V</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://nomoremailouts.bandcamp.com/album/planet-v" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/planet-v/5174732" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Akasha</h3>
+          <p class="track-artist">EKATA (UK)</p>
+          <p class="track-album">Breaking Bounds VA Vol. 4</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://nativeboundaries.bandcamp.com/album/breaking-bounds-va-vol-4" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/breaking-bounds-va-vol-4/5152679" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Autofreak - Funktor Remix</h3>
+          <p class="track-artist">John Selway, Semblance Factor</p>
+          <p class="track-album">Autofreak (Remixed)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/autofreak-remixed/5159615" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Energize</h3>
+          <p class="track-artist">Click Click</p>
+          <p class="track-album">Energize</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://adultentertainmentrecords.bandcamp.com/" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/energize/3018767" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Extra Pressure</h3>
+          <p class="track-artist">Body Hook</p>
+          <p class="track-album">Full Contact</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://seafrontrecordings.bandcamp.com/album/full-contact" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">C.U.N.T.02 - mini</h3>
+          <p class="track-artist">Alexander Koning, Ed Dejon</p>
+          <p class="track-album">C.U.N.T.</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/cunt/5088027" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Machine Explorer</h3>
+          <p class="track-artist">Arpatronic</p>
+          <p class="track-album">Ravemaniac</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://analogconcept.bandcamp.com/album/ravemaniac" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Desolate</h3>
+          <p class="track-artist">HYBRD, Alan Fitzpatrick</p>
+          <p class="track-album">This is HYBRD</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://wearethebraveofficial.bandcamp.com/album/this-is-hybrd" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/this-is-hybrd/5148990" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Circuit</h3>
+          <p class="track-artist">Beriba</p>
+          <p class="track-album">Circuit</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://djberiba.bandcamp.com/album/br380-beriba-circuit-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/circuit/5138465" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Malibu Diet</h3>
+          <p class="track-artist">Terrestrial Access Network</p>
+          <p class="track-album">TAN Summer Vol I</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/tan-summer-vol-i/5151415" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">time has been expanded</h3>
+          <p class="track-artist">Moogie Fox</p>
+          <p class="track-album">Breaking Bounds VA Vol. 4</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://nativeboundaries.bandcamp.com/album/breaking-bounds-va-vol-4" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/breaking-bounds-va-vol-4/5152679" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Murdeshwar</h3>
+          <p class="track-artist">Larionov</p>
+          <p class="track-album">Scena Acid</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://analogconcept.bandcamp.com/album/scena-acid-2" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/scena-acid/5106710" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Polyovik</h3>
+          <p class="track-artist">SHKLV</p>
+          <p class="track-album">Warped Garden</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://mystictrax.bandcamp.com/album/warped-garden" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/warped-garden/5149730" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Vortac Beacon</h3>
+          <p class="track-artist">Posthuman</p>
+          <p class="track-album">The Mind is a Heavy Burden</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://posthuman.bandcamp.com/album/the-mind-is-a-heavy-burden" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/the-mind-is-a-heavy-burden/5133709" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Contact</h3>
+          <p class="track-artist">Blackploid</p>
+          <p class="track-album">Cosmic Drama</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://centralprocessingunit.bandcamp.com/album/cosmic-drama" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/cosmic-drama/5164970" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Metallic Dreams</h3>
+          <p class="track-artist">DFD</p>
+          <p class="track-album">WGD 12009</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://weregoingdeep.bandcamp.com/album/were-going-deep-12009-dfd" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/wgd-12009/5189452" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Fukov</h3>
+          <p class="track-artist">Pzeko, Liryc NonStop</p>
+          <p class="track-album">Robotricks 2</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://rzmuzik.bandcamp.com/album/rz38-pzeko-liryc303-robotrick-2" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/robotricks-2/5123515" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Dech</h3>
+          <p class="track-artist">Brain Enterprise</p>
+          <p class="track-album">Mercury</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://copenhagenelectroalliance.bandcamp.com/album/mercury" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/mercury/5172934" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Not Sorry</h3>
+          <p class="track-artist">The Spy</p>
+          <p class="track-album">Spiral</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://hilltowndiscouk.bandcamp.com/album/hil013-spiral" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/spiral/5107239" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Lost Machines - Single Cut</h3>
+          <p class="track-artist">Humantronic</p>
+          <p class="track-album">Naaya EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://humantronic.bandcamp.com/album/naaya-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/naaya-ep/5130950" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">MOTHERJAM</h3>
+          <p class="track-artist">Helena Hauff, F#X, Black Sites</p>
+          <p class="track-album">R4</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://tresorberlin.bandcamp.com/album/r4" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/r4/5071273" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Cyclope</h3>
+          <p class="track-artist">Atix</p>
+          <p class="track-album">Tunnel Magnétique</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://y-nn-k.bandcamp.com/album/tunnel-magn-tique" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/tunnel-magntique/5081486" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Gearbox</h3>
+          <p class="track-artist">LNS, DJ Sotofett</p>
+          <p class="track-album">Globus Trax</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://tresorberlin.bandcamp.com/album/globus-trax" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/globus-trax/5009062" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Treasure</h3>
+          <p class="track-artist">Dany Rodriguez</p>
+          <p class="track-album">Future visions</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://linkaudio.bandcamp.com/album/future-visions" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/future-visions/5026029" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Balancing Act</h3>
+          <p class="track-artist">Kuiper Belt</p>
+          <p class="track-album">Balancing Act EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://lowercaselife.bandcamp.com/album/balancing-act-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/balancing-act-ep/5135724" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Shifton</h3>
+          <p class="track-artist">Kragg</p>
+          <p class="track-album">Acid Avengers 032</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://tripalium.bandcamp.com/album/aar032-kragg-rtr-acid-avengers-032" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/acid-avengers-032/5119959" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Computer React</h3>
+          <p class="track-artist">Tony Johnson</p>
+          <p class="track-album">Pixel Dreams EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://unlimitedhappiness.bandcamp.com/album/pixel-dreams-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/pixel-dreams-ep/5118664" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Square One</h3>
+          <p class="track-artist">Ronny Pries</p>
+          <p class="track-album">Zero Four Zero</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://abstractrhythm.bandcamp.com/album/zero-four-zero-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/zero-four-zero/5079305" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Investigate The Signal</h3>
+          <p class="track-artist">Zeta Reticula</p>
+          <p class="track-album">Firebird</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://mechatronica.bandcamp.com/album/firebird" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/firebird/5079507" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Finnex</h3>
+          <p class="track-artist">Roel Funcken</p>
+          <p class="track-album">Commuting Observables</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://sciencecult.bandcamp.com/album/commuting-observables" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/commuting-observables/4901010" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Archivo Criminal</h3>
+          <p class="track-artist">Phran</p>
+          <p class="track-album">AFM002</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://activityfm.bandcamp.com/album/afm002" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/afm002/5028577" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Race To The Bottom - IXIANS Remix</h3>
+          <p class="track-artist">Sean Kosa, IXIANS</p>
+          <p class="track-album">Race To The Bottom (The Remixes)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://facecontrol-audio-industries.bandcamp.com/album/race-to-the-bottom-the-remixes" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/race-to-the-bottom-the-remixes/5079458" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Atom</h3>
+          <p class="track-artist">BLUMITSU</p>
+          <p class="track-album">Metamorphic</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://blumitsu.bandcamp.com/album/metamorphic" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/metamorphic/5098153" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Alchemical</h3>
+          <p class="track-artist">MSTRBLSTR</p>
+          <p class="track-album">Alchemical</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://mstrblstr.bandcamp.com/album/alchemical" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/alchemical/5032810" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Thunderclap - Lloyd Stellars Remix - Mixed</h3>
+          <p class="track-artist">Diplomat & Beagle, Lloyd Stellar</p>
+          <p class="track-album">Off Ya Box 2! (Mixed)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://vinylfanatiks.bandcamp.com/album/amentec-presents-off-ya-box-part-two" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/off-ya-box-2/5054586" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Fleeting Crush - Adam Carling Remix</h3>
+          <p class="track-artist">Frederic Sonore</p>
+          <p class="track-album">Fleeting Crush</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://da-traxxrecordings.bandcamp.com/album/fleeting-crush" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/fleeting-crush/5070651" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">A.T.T.R.P.25</h3>
+          <p class="track-artist">deadroid</p>
+          <p class="track-album">Stratagem Switch</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://freestyleman.bandcamp.com/album/stratagem-switch" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/stratagem-switch/5075383" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Space Junk</h3>
+          <p class="track-artist">Radioactive Man</p>
+          <p class="track-album">Space Junk</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://aliencommunications.bandcamp.com/album/astral-projections" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/astral-projections/5068708" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">TranSonicDelta_A5</h3>
+          <p class="track-artist">Client_03</p>
+          <p class="track-album">TranSonicDelta_A5</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://aliencommunications.bandcamp.com/album/astral-projections" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/astral-projections/5068708" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Retroplastic</h3>
+          <p class="track-artist">Saigg</p>
+          <p class="track-album">Tx_pronostic</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://abrakadabra00.bandcamp.com/album/saigg-tx-pronostic-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/tx_pronostic/5079452" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Without You</h3>
+          <p class="track-artist">Bodhi</p>
+          <p class="track-album">Without You / Surge</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://wearebodhi.bandcamp.com/album/without-you-surge" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/without-you-surge/5072679" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Doplo</h3>
+          <p class="track-artist">Carsten Rausch</p>
+          <p class="track-album">Mudskipper</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://adultentertainmentrecords.bandcamp.com/album/carsten-rausch-mudskipper-adulttrx006" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/mudskipper/4953701" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Chant - Christopher Ledger Remix Edit</h3>
+          <p class="track-artist">Or:la, Christopher Ledger</p>
+          <p class="track-album">Trusting Theta Reworks</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://orla-ceadmusic.bandcamp.com/album/trusting-theta-reworks" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/chant-christopherledger-remix/5080586" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Cold Turkey</h3>
+          <p class="track-artist">Fleck E.S.C.</p>
+          <p class="track-album">Nerd Talk</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://sciencecult.bandcamp.com/album/nerd-talk" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Raad Het Woord</h3>
+          <p class="track-artist">Dexter</p>
+          <p class="track-album">I Don't Care (Remaster)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/i-dont-care-remaster/4993713" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">I Don't Care</h3>
+          <p class="track-artist">Dexter</p>
+          <p class="track-album">I Don't Care (Remaster)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://www.beatport.com/release/i-dont-care-remaster/4993713" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Regressive Behaviour</h3>
+          <p class="track-artist">/DL/MS/</p>
+          <p class="track-album">AX/{v1}</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://furatena.bandcamp.com/album/ax-v1" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/axv1/5038179" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Clarity</h3>
+          <p class="track-artist">Zobol</p>
+          <p class="track-album">Mirage</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://zobol.bandcamp.com/album/mirage-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/mirage/5028648" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Tongue Tied</h3>
+          <p class="track-artist">Aleister, Club Designs</p>
+          <p class="track-album">CDMUSIC012</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://clubdesigns.bandcamp.com/album/cdmusic012" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/cdmusic012/5023603" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Format Card?</h3>
+          <p class="track-artist">Lake Hills</p>
+          <p class="track-album">Forever</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://voxnoxberlin.bandcamp.com/album/forever-vnr059" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/forever/5036177" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Kosmo DX21</h3>
+          <p class="track-artist">Legowelt</p>
+          <p class="track-album">Synths Below Sea Level</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://legowelt.bandcamp.com/album/synths-below-sea-level" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/synths-below-sea-level/5047322" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Practical Optimism</h3>
+          <p class="track-artist">Annie Hall</p>
+          <p class="track-album">Practical Optimism EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://musicanniehall.bandcamp.com/album/practical-optimism-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/practical-optimism-ep/5056384" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Drift n Shift</h3>
+          <p class="track-artist">Kalcagni</p>
+          <p class="track-album">Target Practice</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://cosmoba.bandcamp.com/album/target-practice" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/target-practice/5148537" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Track 4</h3>
+          <p class="track-artist">Morphology</p>
+          <p class="track-album">Thumbprint EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://thumbprintrecords.bandcamp.com/album/thumbprint-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/thumbprint-ep/5067555" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Imagination Creates Reality - Kafkactrl Remix</h3>
+          <p class="track-artist">Acida Dominga, Kafkactrl</p>
+          <p class="track-album">Imagination Creates Reality - Remixes</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://acidadominga.bandcamp.com/album/imagination-creates-reality-remixes" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/imagination-creates-reality-remixes/5048235" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Astral Waves</h3>
+          <p class="track-artist">Lake Haze</p>
+          <p class="track-album">Geonomic Fusion</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://lakehaze.bandcamp.com/album/geonomic-fusion" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/geonomic-fusion/5058877" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Acht</h3>
+          <p class="track-artist">The Exaltics</p>
+          <p class="track-album">Das Heise Experiment</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://solaronemusic.bandcamp.com/album/das-heise-experiment-digital-album" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/das-heise-experiment/5057135" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Nucleosynthesis</h3>
+          <p class="track-artist">Lake Haze</p>
+          <p class="track-album">Geonomic Fusion</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://lakehaze.bandcamp.com/album/geonomic-fusion" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/geonomic-fusion/5058877" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Onironautas - Club Mix</h3>
+          <p class="track-artist">EC13, Calagad 13</p>
+          <p class="track-album">SINFONIAS DEL ABISMO</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://cosmictribe.bandcamp.com/album/sinfonias-del-abismo" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/sinfonias-del-abismo/5025861" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">The Source - CT Kidobó Remix</h3>
+          <p class="track-artist">Diamond Haze, CT Kidobó</p>
+          <p class="track-album">Transboundary Haze II</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://tapessublimating.bandcamp.com/album/transboundary-haze-ii" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/transboundary-haze-ii/4999880" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">I Feel It - DJ Haus Remix</h3>
+          <p class="track-artist">Laura Coch, The Egyptian Lover, DJ Haus</p>
+          <p class="track-album">I Feel It (DJ Haus Remix)</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://lauracoch.bandcamp.com/album/i-feel-it-ft-the-egyptian-lover" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/i-feel-it/5028526" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Test One</h3>
+          <p class="track-artist">Eva May</p>
+          <p class="track-album">The Evolution Phase Five</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://visionsrecordings.bandcamp.com/album/the-evolution-phase-5" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/the-evolution-phase-five/5068703" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Waves of Derbyshire - CJ's Bonus Edit</h3>
+          <p class="track-artist">CJ Bolland</p>
+          <p class="track-album">High Voltage EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://flatlife-records.bandcamp.com/album/high-voltage-ep-acid-electro-techno" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/high-voltage-ep/5023576" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Interstellar Ride</h3>
+          <p class="track-artist">Idiocrat</p>
+          <p class="track-album">Interstellar Ride EP</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://urbankickzrecordings.bandcamp.com/album/ukrss259-interstellar-ride-ep" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/interstellar-ride-ep/5085255" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">District 16_noLim</h3>
+          <p class="track-artist">A/Filatov</p>
+          <p class="track-album">Tracklistings & Division Virtuel Records VA Compilation, Pt. 2</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://divisionvirtuel.bandcamp.com/album/tracklistings-division-virtuel-records-va-compilation-pt-2" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/tracklistings-division-virtuel-records-va-compilation-pt-2/5140661" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Drag And Drop</h3>
+          <p class="track-artist">Laekis</p>
+          <p class="track-album">Build</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://merien.bandcamp.com/album/laekis-build-electro" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/build/5060388" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+
+      <div class="track-card">
+        <div class="track-info">
+          <h3 class="track-title">Diaspora Simulacra</h3>
+          <p class="track-artist">Sepehr</p>
+          <p class="track-album">Sounds From the Iranian Ultraverse</p>
+        </div>
+        <div class="track-links">
+          
+          <a href="https://shaytoonrecords.bandcamp.com/album/sounds-from-the-iranian-ultraverse" class="buy-link bandcamp" target="_blank" rel="noopener noreferrer">
+            <span>🔊</span> Bandcamp
+          </a>
+        
+          <a href="https://www.beatport.com/release/sounds-from-the-iranian-ultraverse/3695922" class="buy-link beatport" target="_blank" rel="noopener noreferrer">
+            <span>▶</span> Beatport
+          </a>
+        
+        </div>
+      </div>
+    
+    </div>
+
+    <div class="stats">
+      <p>💎 110 handpicked electro gems</p>
+      <p>Every purchase directly supports the artists and labels keeping the scene alive</p>
+    </div>
+  </div>
+</body>
+</html>
