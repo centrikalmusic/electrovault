@@ -190,21 +190,32 @@
       border-color: rgba(15, 23, 42, 0.12);
     }
 
+    .shop {
+      background: #3b82f6;
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(59, 130, 246, 0.45);
+    }
+
+    .shop:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
     .footnote {
       font-size: 0.75rem;
       color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+      text-align: center;
       margin-top: 6px;
-      flex-wrap: wrap;
+      line-height: 1.5;
+    }
+
+    .footnote span {
+      display: block;
     }
 
     .footnote span:last-child {
       font-size: 0.7rem;
       opacity: 0.7;
-      text-align: right;
+      margin-top: 4px;
     }
 
     @media (max-width: 480px) {
@@ -264,6 +275,17 @@
             <span class="label-sub">A Good Spotify Alternative</span>
           </div>
         </a>
+
+        <a
+          href="shop.html"
+          class="button shop"
+          id="shop-button"
+        >
+          <div>
+            <span class="label-main">Buy on Bandcamp / Beatport</span><br />
+            <span class="label-sub">Support independent music!</span>
+          </div>
+        </a>
       </div>
 
       <div class="footnote">
@@ -278,6 +300,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       var spotifyButton = document.getElementById('spotify-button');
       var appleButton = document.getElementById('apple-button');
+      var shopButton = document.getElementById('shop-button');
 
       if (spotifyButton) {
         spotifyButton.addEventListener('click', function () {
@@ -291,6 +314,14 @@
         appleButton.addEventListener('click', function () {
           if (typeof fbq === 'function') {
             fbq('trackCustom', 'AppleMusicClick');
+          }
+        });
+      }
+
+      if (shopButton) {
+        shopButton.addEventListener('click', function () {
+          if (typeof fbq === 'function') {
+            fbq('trackCustom', 'ShopClick');
           }
         });
       }
