@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Centrikal's Electro Vault – Listen Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Centrikal's Electro Vault – a curated stash of electro gems. Listen on Spotify or Apple Music."
+  />
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1554393415689427');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1554393415689427&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    :root {
+      --bg: #050509;
+      --card: #11111b;
+      --text-main: #f9f9ff;
+      --text-muted: #a1a1c2;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f1b3f 0, #050509 55%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: linear-gradient(145deg, #11111b 0, #070711 60%, #16122a 100%);
+      border-radius: 24px;
+      padding: 22px 20px 20px;
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.7),
+        0 0 0 1px var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow-orbit {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(127, 90, 240, 0.35), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.25), transparent 55%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .logo-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      max-height: 200px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+      justify-content: center;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.35);
+      background: rgba(12, 11, 30, 0.9);
+      color: #e5e7ff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Section divider */
+    .section-label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      opacity: 0.6;
+      text-align: center;
+      margin: 14px 0 8px;
+      position: relative;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 28%;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .section-label::before { left: 0; }
+    .section-label::after  { right: 0; }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    a.button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      transition:
+        transform 0.08s ease-out,
+        box-shadow 0.08s ease-out,
+        border-color 0.1s ease-out,
+        background 0.1s ease-out;
+    }
+
+    a.button > div {
+      text-align: center;
+    }
+
+    a.button span.label-main {
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      font-size: 0.72rem;
+    }
+
+    a.button span.label-sub {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    a.button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Streaming */
+    .spotify {
+      background: #1db954;
+      color: #000;
+      box-shadow: 0 10px 26px rgba(29, 185, 84, 0.55);
+    }
+
+    .spotify:hover {
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .apple {
+      background: #f9fafb;
+      color: #000;
+      box-shadow: 0 10px 26px rgba(249, 250, 251, 0.35);
+    }
+
+    .apple:hover {
+      border-color: rgba(15, 23, 42, 0.12);
+    }
+
+    /* YouTube */
+    .youtube {
+      background: #ff0000;
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(255, 0, 0, 0.45);
+    }
+
+    .youtube:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Buy – Beatport */
+    .beatport {
+      background: #01ff95;
+      color: #000;
+      box-shadow: 0 10px 26px rgba(1, 255, 149, 0.45);
+    }
+
+    .beatport:hover {
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    /* Buy – Bandcamp */
+    .bandcamp {
+      background: #1da0c3;
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(29, 160, 195, 0.45);
+    }
+
+    .bandcamp:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .footnote {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .footnote span {
+      display: block;
+    }
+
+    .footnote span:last-child {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px 16px 18px;
+      }
+
+      .logo-wrap img {
+        max-height: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="glow-orbit"></div>
+    <div class="card-inner">
+
+      <!-- LOGO IMAGE -->
+      <div class="logo-wrap">
+        <img src="electrovault.png" alt="Centrikal's Electro Vault" />
+      </div>
+
+      <div class="subtitle">
+        Centrikal's current electro gems 💎👀
+      </div>
+
+      <div class="chip-row">
+        <div class="chip">Electro</div>
+        <div class="chip">Breaks</div>
+        <div class="chip">Bass</div>
+        <div class="chip">Curated</div>
+      </div>
+
+      <!-- STREAM -->
+      <div class="section-label">Stream</div>
+      <div class="buttons">
+        <a
+          href="https://open.spotify.com/playlist/1yYicyyPLF7EqD5cktvDEk"
+          class="button spotify"
+          id="spotify-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Listen on Spotify</span><br />
+            <span class="label-sub">The Devil You Know</span>
+          </div>
+        </a>
+
+        <a
+          href="https://music.apple.com/us/playlist/electro-vault/pl.u-WabZvdVHeAemjlM"
+          class="button apple"
+          id="apple-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Listen on Apple Music</span><br />
+            <span class="label-sub">A Good Spotify Alternative</span>
+          </div>
+        </a>
+
+        <a
+          href="https://www.youtube.com/playlist?list=PLqgvBune93Id97lv_1DkiPGxfywFxKahY"
+          class="button youtube"
+          id="youtube-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Watch on YouTube</span><br />
+            <span class="label-sub">Full Playlist on YouTube</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- BUY -->
+      <div class="section-label">Buy</div>
+      <div class="buttons">
+        <a
+          href="https://crates.co/spotify/1yYicyyPLF7EqD5cktvDEk?page=1"
+          class="button beatport"
+          id="beatport-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Buy on Beatport</span><br />
+            <span class="label-sub">Support the artists directly</span>
+          </div>
+        </a>
+
+        <a
+          href="https://hypem.com/merch-table/1yYicyyPLF7EqD5cktvDEk"
+          class="button bandcamp"
+          id="bandcamp-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>
+            <span class="label-main">Buy on Bandcamp</span><br />
+            <span class="label-sub">Support the artists directly</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="footnote">
+        <span>You'll be redirected to your chosen platform.</span>
+        <span>Tip: add/save it to your library so you don't lose the electro vault!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Click tracking for Meta Pixel custom events -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var buttons = [
+        { id: 'spotify-button',  event: 'SpotifyClick'    },
+        { id: 'apple-button',    event: 'AppleMusicClick' },
+        { id: 'youtube-button',  event: 'YouTubeClick'    },
+        { id: 'beatport-button', event: 'BeatportClick'   },
+        { id: 'bandcamp-button', event: 'BandcampClick'   },
+      ];
+
+      buttons.forEach(function (b) {
+        var el = document.getElementById(b.id);
+        if (el) {
+          el.addEventListener('click', function () {
+            if (typeof fbq === 'function') {
+              fbq('trackCustom', b.event);
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
